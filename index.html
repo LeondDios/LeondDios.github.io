@@ -3,439 +3,593 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>El Arte que Falla - Andrés Ariel Rubio Lavín</title>
-  <link rel="stylesheet" href="styles/styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab&display=swap" rel="stylesheet">
- <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+  <title>León de Dios</title>
+  <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Oswald:wght@400;700&family=Inconsolata:wght@400;700&family=Abril+Fatface&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --papel:#f2ede6; --tinta:#1a1008; --rojo:#c8001a; --gris:#3a3020; }
+    html { scroll-behavior:smooth; }
+    body { background:var(--papel); color:var(--tinta); font-family:'Inconsolata',monospace; font-size:14px; line-height:1.5; overflow-x:hidden; cursor:crosshair; }
 
+    /* grain */
+    body::before { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E"); pointer-events:none; z-index:9997; mix-blend-mode:multiply; }
+
+    /* NAV */
+    nav { position:fixed; top:0; left:0; right:0; z-index:900; display:flex; align-items:stretch; background:var(--tinta); height:44px; }
+    .nav-logo { font-family:'Permanent Marker',cursive; font-size:1rem; color:var(--papel); background:var(--rojo); border:none; padding:0 1.2rem; cursor:crosshair; display:flex; align-items:center; }
+    .nav-links { display:flex; list-style:none; flex:1; }
+    .nav-links a { font-family:'Inconsolata',monospace; font-size:0.72rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--papel); text-decoration:none; padding:0 1.1rem; display:flex; align-items:center; border-left:1px solid #333; transition:background 0.15s; }
+    .nav-links a:hover { background:var(--rojo); }
+
+    /* HERO */
+    #inicio { min-height:100vh; padding:44px 0 0; background:var(--papel); position:relative; }
+    #inicio::before { content:''; position:absolute; top:44px; left:0; width:18px; bottom:0; background:var(--rojo); }
+    .hero-inner { padding:2.5rem 2.5rem 2.5rem 3.5rem; position:relative; }
+    .hero-byline { font-family:'Inconsolata',monospace; font-size:0.7rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--gris); margin-bottom:0.6rem; border-bottom:2px solid var(--tinta); padding-bottom:0.4rem; display:inline-block; }
+
+    /* GLITCH — funciona sobre fondo claro con isolation + screen */
+    .glitch-wrap {
+      display: inline-block;
+      padding: 0;
+      animation: drift 5s ease-in-out infinite;
+      position: relative;
+      overflow: visible;
+    }
+    @keyframes drift {
+      0%,100% { transform:translate(0,0) rotate(-0.3deg); }
+      33%     { transform:translate(-2px,3px) rotate(0.2deg); }
+      66%     { transform:translate(2px,-2px) rotate(-0.2deg); }
+    }
+
+    .glitch {
+      font-family: 'Abril Fatface', serif;
+      font-size: clamp(5rem,16vw,13rem);
+      line-height: 0.85;
+      color: var(--tinta);
+      position: relative;
+      display: inline-block;
+      letter-spacing: -0.03em;
+      overflow: visible;
+    }
+
+    .glitch-copy {
+      position: absolute;
+      top: 0; left: 0;
+      font-family: 'Abril Fatface', serif;
+      font-size: clamp(5rem,16vw,13rem);
+      line-height: 0.85;
+      letter-spacing: -0.03em;
+      pointer-events: none;
+      opacity: 0;
+      white-space: pre;
+      overflow: visible;
+    }
+
+    .hero-name-sub { font-family:'Inconsolata',monospace; font-size:0.75rem; color:var(--gris); margin-top:0.8rem; letter-spacing:0.12em; border-top:1px solid #ccc; padding-top:0.6rem; }
+    .hero-layout { display:grid; grid-template-columns:auto 1fr; gap:2rem; align-items:start; margin-top:1.2rem; }
+    .hero-side { padding-top:1rem; display:flex; flex-direction:column; gap:1.2rem; }
+    .sticker { display:inline-block; background:var(--rojo); color:var(--papel); font-family:'Permanent Marker',cursive; font-size:0.9rem; padding:0.5rem 0.9rem; transform:rotate(-3deg); line-height:1.3; max-width:200px; }
+    .sticker.rotate-pos { transform:rotate(2.5deg); }
+    .sticker.dark { background:var(--tinta); }
+    .hero-tagline { font-family:'Permanent Marker',cursive; font-size:1.1rem; line-height:1.4; color:var(--tinta); transform:rotate(-1deg); display:inline-block; max-width:280px; }
+    .hero-cols { display:grid; grid-template-columns:1fr 1fr 1fr; gap:0; border-top:3px solid var(--tinta); margin-top:2rem; }
+    .hero-col { padding:1rem 1.2rem; border-right:1px solid var(--tinta); }
+    .hero-col:last-child { border-right:none; }
+    .col-hed { font-family:'Oswald',sans-serif; font-size:0.6rem; letter-spacing:0.28em; text-transform:uppercase; color:var(--rojo); border-bottom:1px solid var(--tinta); padding-bottom:0.3rem; margin-bottom:0.6rem; }
+    .col-body { font-size:0.82rem; line-height:1.7; color:var(--gris); }
+    .col-list { list-style:none; }
+    .col-list li { font-size:0.8rem; color:var(--gris); padding:0.2rem 0; border-bottom:1px dotted #bbb; }
+    .col-list li::before { content:'// '; color:var(--rojo); font-weight:bold; }
+
+    /* SECCIONES */
+    main section { display:none; min-height:100vh; padding:44px 0 4rem; }
+    main section.active { display:block; }
+    .sec-head { background:var(--tinta); padding:0.6rem 2rem; display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem; }
+    .sec-head-title { font-family:'Abril Fatface',serif; font-size:2.2rem; color:var(--papel); }
+    .sec-head-meta { font-family:'Inconsolata',monospace; font-size:0.62rem; letter-spacing:0.18em; text-transform:uppercase; color:#aaa; text-align:right; line-height:1.5; }
+
+    /* SOBRE MÍ */
+    #sobre-mi .wrap { padding:0 2rem; display:grid; grid-template-columns:2fr 1fr; gap:3rem; }
+    .bio-main p { font-size:0.95rem; line-height:1.85; color:var(--gris); margin-bottom:1.2rem; }
+    .bio-main p:first-child { font-family:'Permanent Marker',cursive; font-size:1.1rem; color:var(--tinta); }
+    .bio-aside { border-left:4px solid var(--rojo); padding-left:1.2rem; }
+    .aside-block { margin-bottom:1.8rem; }
+    .aside-label { font-family:'Oswald',sans-serif; font-size:0.58rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--rojo); display:block; margin-bottom:0.3rem; }
+    .aside-val { font-size:0.85rem; color:var(--gris); line-height:1.6; }
+
+    /* OBRAS */
+    #obras .wrap { padding:0 2rem; }
+    .obra-item { border-bottom:2px solid var(--tinta); overflow:hidden; }
+    .obra-row { display:grid; grid-template-columns:2.5rem 1fr auto auto; gap:1rem; align-items:start; padding:1.1rem 0; cursor:crosshair; }
+    .obra-row:hover .obra-title { color:var(--rojo); }
+    .obra-num { font-family:'Inconsolata',monospace; font-size:0.7rem; color:#999; padding-top:0.4rem; }
+    .obra-title { font-family:'Abril Fatface',serif; font-size:clamp(1.4rem,3vw,2.2rem); color:var(--tinta); transition:color 0.15s; line-height:1; margin-bottom:0.3rem; }
+    .obra-syn { font-size:0.8rem; color:#777; font-style:italic; line-height:1.4; }
+    .obra-item.open .obra-syn { display:none; }
+    .obra-tipo { font-family:'Inconsolata',monospace; font-size:0.58rem; letter-spacing:0.12em; text-transform:uppercase; color:#666; border:1px solid var(--tinta); padding:0.2rem 0.5rem; white-space:nowrap; margin-top:0.3rem; }
+    .obra-plus { font-size:1.3rem; color:#999; transition:transform 0.3s, color 0.2s; line-height:1; padding-top:0.3rem; }
+    .obra-item.open .obra-plus { transform:rotate(45deg); color:var(--rojo); }
+    .obra-body { max-height:0; overflow:hidden; transition:max-height 0.55s cubic-bezier(0.16,1,0.3,1); }
+    .obra-item.open .obra-body { max-height:2000px; }
+    .obra-body-in { padding:1.2rem 0 2rem 3.5rem; display:grid; grid-template-columns:1.3fr 1fr; gap:2rem; border-top:1px dashed #bbb; }
+    .obra-desc { font-size:0.88rem; line-height:1.9; color:var(--gris); }
+    .obra-desc p { margin-bottom:0.9rem; }
+    .obra-specs { display:flex; flex-direction:column; gap:0.8rem; }
+    .obra-sk { font-family:'Oswald',sans-serif; font-size:0.55rem; letter-spacing:0.28em; text-transform:uppercase; color:var(--rojo); display:block; margin-bottom:0.15rem; }
+    .obra-sv { font-size:0.82rem; color:#555; }
+
+    /* MEDIA */
+    .obra-media { grid-column:1/-1; display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:6px; margin-top:1rem; }
+    .obra-media img { width:100%; height:300px; object-fit:cover; display:block; filter:grayscale(25%); transition:filter 0.3s; cursor:zoom-in; }
+    .obra-media img:hover { filter:grayscale(0%); }
+    .obra-media video { width:100%; display:block; max-height:380px; grid-column:1/-1; }
+    .obra-cta { display:inline-block; margin-top:0.8rem; font-family:'Inconsolata',monospace; font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--rojo); text-decoration:none; border-bottom:2px solid var(--rojo); padding-bottom:1px; }
+    .obra-cta:hover { color:var(--tinta); border-color:var(--tinta); }
+
+    /* LIGHTBOX */
+    #lightbox { display:none; position:fixed; inset:0; background:rgba(5,3,2,0.96); z-index:9999; align-items:center; justify-content:center; cursor:zoom-out; }
+    #lightbox.open { display:flex; }
+    #lightbox img { max-width:92vw; max-height:92vh; object-fit:contain; }
+    #lb-close { position:absolute; top:1rem; right:1.5rem; font-size:2rem; color:#fff; background:none; border:none; cursor:pointer; opacity:0.5; line-height:1; transition:opacity 0.2s; font-family:'Inconsolata',monospace; }
+    #lb-close:hover { opacity:1; }
+
+    /* MANIFIESTO */
+    #manifiesto .wrap { padding:0 2rem; max-width:660px; }
+    .mani-body { font-size:0.95rem; line-height:2; color:var(--gris); }
+    .mani-body p { margin-bottom:1.6rem; }
+    .mani-body p.iz { padding-right:28%; }
+    .mani-body p.ce { text-align:center; }
+    .mani-body p.de { text-align:right; padding-left:28%; }
+    .mani-body strong { color:var(--tinta); }
+    .mani-body em { font-style:italic; }
+    .mani-body hr { border:none; border-top:1px dashed #bbb; margin:2rem 0; }
+    .mani-dl { margin-top:2.5rem; padding-top:1.5rem; border-top:2px solid var(--tinta); }
+    .mani-dl a { font-family:'Inconsolata',monospace; font-size:0.68rem; letter-spacing:0.22em; text-transform:uppercase; color:#888; text-decoration:none; }
+    .mani-dl a:hover { color:var(--rojo); }
+
+    /* CONTACTO */
+    #contacto .wrap { padding:0 2rem; display:grid; grid-template-columns:1fr 1fr; gap:3rem; }
+    .contact-data { display:flex; flex-direction:column; gap:2rem; }
+    .contact-k { font-family:'Oswald',sans-serif; font-size:0.58rem; letter-spacing:0.28em; text-transform:uppercase; color:var(--rojo); display:block; margin-bottom:0.3rem; }
+    .contact-v { font-size:0.95rem; color:var(--tinta); }
+    .contact-v a { color:inherit; text-decoration:none; border-bottom:1px dotted var(--tinta); }
+    .contact-v a:hover { color:var(--rojo); border-color:var(--rojo); }
+    .contact-img img { width:100%; display:block; filter:grayscale(50%) contrast(1.15); }
+
+    /* FOOTER */
+    footer { background:var(--tinta); color:#666; padding:1rem 2rem; display:flex; justify-content:space-between; font-family:'Inconsolata',monospace; font-size:0.62rem; letter-spacing:0.18em; text-transform:uppercase; }
+
+    @media (max-width:700px) {
+      .hero-layout { grid-template-columns:1fr; }
+      .hero-cols { grid-template-columns:1fr; }
+      .hero-col { border-right:none; border-bottom:1px solid var(--tinta); }
+      #sobre-mi .wrap, #contacto .wrap { grid-template-columns:1fr; }
+      .bio-aside { border-left:none; border-top:4px solid var(--rojo); padding:1.2rem 0 0; }
+      .obra-body-in { grid-template-columns:1fr; padding-left:0; }
+      .nav-links a { padding:0 0.7rem; font-size:0.65rem; }
+    }
+  </style>
 </head>
 <body>
+
   <nav>
-    <a href="#" onclick="mostrarInicio()">Inicio</a>
-    <a href="#" onclick="mostrarSeccion('sobre-mi')">Sobre mí</a>
-    <a href="#" onclick="mostrarSeccion('obras')">Obras</a>
-    <a href="#" onclick="mostrarSeccion('manifiesto')">Manifiesto</a>
-    <a href="#" onclick="mostrarSeccion('contacto')">Contacto</a>
+    <button class="nav-logo" onclick="mostrarInicio()">León de Dios</button>
+    <ul class="nav-links">
+      <li><a href="#" onclick="mostrarSeccion('sobre-mi')">Sobre mí</a></li>
+      <li><a href="#" onclick="mostrarSeccion('obras')">Obras</a></li>
+      <li><a href="#" onclick="mostrarSeccion('manifiesto')">Manifiesto</a></li>
+      <li><a href="#" onclick="mostrarSeccion('contacto')">Contacto</a></li>
+    </ul>
   </nav>
 
   <header id="inicio">
-    <h1>LEÓN DE DIOS</h1>
-    <h2>El arte cómodo ya no nos alcanza...</h2>
+    <div class="hero-inner">
+      <span class="hero-byline">Andrés Ariel Rubio Lavín &nbsp;·&nbsp; Arte Digital &nbsp;·&nbsp; UAM Lerma</span>
+      <div class="hero-layout">
+        <div>
+          <div class="glitch-wrap">
+            <span class="glitch" data-text="LEÓN&#xa;DE DIOS">LEÓN<br>DE DIOS</span>
+          </div>
+          <p class="hero-name-sub">Arte que falla. Y por eso, persiste.</p>
+        </div>
+        <div class="hero-side">
+          <div class="sticker">Arte que falla ★<br>2025</div>
+          <div class="hero-tagline">"El arte cómodo ya no nos alcanza."</div>
+          <div class="sticker dark rotate-pos">UAM Lerma<br>Arte Digital</div>
+        </div>
+      </div>
+      <div class="hero-cols">
+        <div class="hero-col">
+          <p class="col-hed">Quién</p>
+          <p class="col-body">Artista digital en formación. Programación, fotografía, video, instalación. Arte como grieta — no como decoración.</p>
+        </div>
+        <div class="hero-col">
+          <p class="col-hed">Obras</p>
+          <ul class="col-list">
+            <li>Dime Quién Soy</li><li>Geo[vo]x</li><li>[EC]H2O</li>
+            <li>BEO</li><li>El Sendero de los Muertos</li>
+            <li>Cubo de Experiencias</li><li>Autoretratos</li>
+          </ul>
+        </div>
+        <div class="hero-col">
+          <p class="col-hed">Exposiciones</p>
+          <p class="col-body">[EC]H2O — 2do Festival Estudio Simbiosis, Toluca<br><br>El Sendero de los Muertos — Festivarte</p>
+        </div>
+      </div>
+    </div>
   </header>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox">
+    <button id="lb-close" onclick="closeLB()">✕</button>
+    <img id="lb-img" src="" alt="">
+  </div>
 
   <main>
     <section id="sobre-mi">
-      <h2>SOBRE MÍ</h2>
-      <p class="left-align">
-        Soy un artista digital en formación, con base en la Universidad Autónoma Metropolitana, Unidad Lerma, donde estudio la Licenciatura en Arte y Comunicación Digitales. Mi práctica cruza programación, fotografía, edición de audio y video, pero no se limita a la técnica: me interesa el arte como posibilidad de apertura, como grieta que nos recuerda que hay otras formas de vivir el mundo.
-      </p>
-      <p class="center-align">
-        Mis obras suelen abordar temas sociales y procesos de descubrimiento personal. Creo en un arte que no pretende salvar, pero sí sacudir. Que puede incomodar, activar la memoria, proponer otras formas de habitar lo común. Me interesa lo político no como asunto de partidos o gobiernos, sino como campo de disputa por el significado, por el orden social, por las identidades colectivas. Un arte que reconoce el conflicto como parte del tejido de lo público. He trabajado tanto de forma individual como en colaboración con otrxs artistas.
-      </p>
-      <p class="right-align">
-        Entre las experiencias más significativas está la presentación de la obra [EC]H2O en el Segundo Festival Estudio Simbiosis, y del videojuego El Sendero de los Muertos en el evento Festivarte. El arte que me interesa no es cómodo ni complaciente. Es tenso, contradictorio, encarnado. Un arte que falla. Y por eso, persiste.
-      </p>
+      <div class="sec-head"><span class="sec-head-title">Sobre mí</span><span class="sec-head-meta">León de Dios · UAM Lerma</span></div>
+      <div class="wrap">
+        <div class="bio-main">
+          <p>Artista digital en formación, con base en la UAM Lerma. Mi práctica cruza programación, fotografía, edición de audio y video — pero no se limita a la técnica: me interesa el arte como posibilidad de apertura, como grieta que recuerda que hay otras formas de vivir el mundo.</p>
+          <p>Mis obras abordan temas sociales y procesos de descubrimiento personal. Creo en un arte que no pretende salvar, pero sí sacudir. Que incomoda, activa la memoria, propone otras formas de habitar lo común.</p>
+          <p>El arte que me interesa es tenso, contradictorio, encarnado. Un arte que falla. Y por eso, persiste.</p>
+        </div>
+        <div class="bio-aside">
+          <div class="aside-block"><span class="aside-label">Institución</span><span class="aside-val">Universidad Autónoma Metropolitana, Unidad Lerma</span></div>
+          <div class="aside-block"><span class="aside-label">Licenciatura</span><span class="aside-val">Arte y Comunicación Digitales</span></div>
+          <div class="aside-block"><span class="aside-label">Exposiciones</span><span class="aside-val">[EC]H2O — 2do Festival Estudio Simbiosis, Toluca<br><br>El Sendero de los Muertos — Festivarte</span></div>
+          <div class="aside-block"><span class="aside-label">Disciplinas</span><span class="aside-val">Instalación interactiva · Video experimental · Plataformas web · Videojuego · Fotografía</span></div>
+        </div>
+      </div>
     </section>
 
     <section id="obras">
-      <h2>Obras</h2>
-      <div class="obra">
-        <h3>Dime Quién Soy</h3>
-        <p>Dime Quién Soy es un cortometraje experimental de tres minutos que combina el lenguaje cinematográfico con la visualización generativa en TouchDesigner. Esta obra surge de una reflexión profunda sobre la construcción de la identidad y cómo esta puede verse alterada por las voces externas que nos rodean.
+      <div class="sec-head"><span class="sec-head-title">Obras</span><span class="sec-head-meta">07 piezas · 2022—2025</span></div>
+      <div class="wrap">
 
-Inspirándonos en la Teoría Cognitiva Social de Albert Bandura, exploramos cómo la identidad personal no se forma únicamente a partir de la experiencia directa, sino también mediante la observación del entorno y la interpretación subjetiva de los comentarios ajenos. Bandura distingue tres componentes clave del autoconcepto: la autoimagen, la autoestima y la autoeficacia. En este proyecto, los visuales fragmentados y superpuestos, junto con una composición sonora que alterna entre lo íntimo y lo invasivo, buscan representar cómo estas dimensiones internas se ven afectadas por las presiones del contexto social.
+        <div class="obra-item">
+          <div class="obra-row" onclick="toggleObra(this)">
+            <span class="obra-num">01</span>
+            <div><div class="obra-title">Dime Quién Soy</div><div class="obra-syn">¿Quién somos cuando los demás nos nombran?</div></div>
+            <span class="obra-tipo">Cortometraje</span><span class="obra-plus">+</span>
+          </div>
+          <div class="obra-body"><div class="obra-body-in">
+            <div class="obra-desc">
+              <p>Cortometraje experimental de tres minutos que combina lenguaje cinematográfico con visualización generativa en TouchDesigner. Explora cómo la identidad personal se ve fracturada por las voces externas — a partir de Bandura: autoimagen, autoestima, autoeficacia.</p>
+              <p>Los visuales fragmentados y una composición sonora que alterna entre lo íntimo y lo invasivo revelan la fragilidad de la identidad construida desde la mirada ajena.</p>
+            </div>
+            <div class="obra-specs">
+              <div><span class="obra-sk">Formato</span><span class="obra-sv">Cortometraje · 3 min</span></div>
+              <div><span class="obra-sk">Técnica</span><span class="obra-sv">TouchDesigner, visualización generativa</span></div>
+              <div><span class="obra-sk">Output</span><span class="obra-sv">Video 3 canales / Audio 2 canales</span></div>
+              <div><span class="obra-sk">Presentada en</span><span class="obra-sv">UAM Lerma</span></div>
+            </div>
+            <div class="obra-media"><video controls src="styles/IMG_6105.mp4"></video></div>
+          </div></div>
+        </div>
 
-El cortometraje se despliega a través de una salida visual en tres canales y una experiencia sonora en dos canales, generando una inmersión sensorial que permite al espectador percibir la fragilidad de la identidad cuando esta se construye en función de las miradas ajenas.
+        <div class="obra-item">
+          <div class="obra-row" onclick="toggleObra(this)">
+            <span class="obra-num">02</span>
+            <div><div class="obra-title">Geo[vo]x</div><div class="obra-syn">La memoria colectiva cartografiada.</div></div>
+            <span class="obra-tipo">Web interactiva</span><span class="obra-plus">+</span>
+          </div>
+          <div class="obra-body"><div class="obra-body-in">
+            <div class="obra-desc">
+              <p>Plataforma web que conecta memoria colectiva y participación comunitaria. Permite registrar relatos en texto y fotografía vinculados a lugares específicos. Los espacios cotidianos se convierten en puntos de encuentro cargados de significado emocional.</p>
+              <a class="obra-cta" href="https://geovox.onrender.com/index" target="_blank">Ver obra →</a>
+            </div>
+            <div class="obra-specs">
+              <div><span class="obra-sk">Formato</span><span class="obra-sv">Plataforma web interactiva</span></div>
+              <div><span class="obra-sk">Técnica</span><span class="obra-sv">Mapa colaborativo, texto y fotografía</span></div>
+            </div>
+            <div class="obra-media"><img src="styles/{E5A737FF-B06D-4288-9172-BE024FA0F0B4}.png" alt="Geo[vo]x"></div>
+          </div></div>
+        </div>
 
-Dime Quién Soy fue desarrollada y presentada en la Universidad Autónoma Metropolitana, unidad Lerma.</p>
+        <div class="obra-item">
+          <div class="obra-row" onclick="toggleObra(this)">
+            <span class="obra-num">03</span>
+            <div><div class="obra-title">[EC]H2O</div><div class="obra-syn">El eco de una ciénaga desaparecida.</div></div>
+            <span class="obra-tipo">Instalación</span><span class="obra-plus">+</span>
+          </div>
+          <div class="obra-body"><div class="obra-body-in">
+            <div class="obra-desc">
+              <p>Instalación interactiva de sitio específico que reactiva la memoria ambiental del territorio donde hoy se erige la UAM Lerma. Engranes activados por servomotores aceleran cuando un sensor Kinect detecta al espectador, revelando la universidad edificada sobre la antigua ciénaga mientras sonidos de agua y fauna perdida llenan el espacio.</p>
+            </div>
+            <div class="obra-specs">
+              <div><span class="obra-sk">Formato</span><span class="obra-sv">Instalación · sitio específico</span></div>
+              <div><span class="obra-sk">Técnica</span><span class="obra-sv">Kinect, servomotores, audio 2 canales</span></div>
+              <div><span class="obra-sk">Presentada en</span><span class="obra-sv">UAM Lerma · 2do Festival Estudio Simbiosis, Toluca</span></div>
+            </div>
+            <div class="obra-media">
+              <img src="styles/WhatsApp Image 2025-05-10 at 1.23.55 PM.jpeg" alt="[EC]H2O">
+              <img src="styles/_MG_7362.JPG" alt="[EC]H2O">
+              <img src="styles/_MG_7278.JPG" alt="[EC]H2O">
+              <img src="styles/_MG_7394.JPG" alt="[EC]H2O">
+            </div>
+          </div></div>
+        </div>
 
-<video id="DQS" controls src="styles\IMG_6105.mp4"></video>
-       
-       
-      </div>
+        <div class="obra-item">
+          <div class="obra-row" onclick="toggleObra(this)">
+            <span class="obra-num">04</span>
+            <div><div class="obra-title">BEO</div><div class="obra-syn">Poesía zapoteca. Efímera, irrepetible.</div></div>
+            <span class="obra-tipo">Narrativa web</span><span class="obra-plus">+</span>
+          </div>
+          <div class="obra-body"><div class="obra-body-in">
+            <div class="obra-desc">
+              <p>Obra web de narrativa no lineal que invita a explorar la lengua zapoteca a través de la poesía generativa. Cada usuario construye su propio poema; las decisiones desbloquean imágenes como huellas. Al concluir, el sitio se reinicia. Un llamado a reconocer la diversidad cultural como memoria viva.</p>
+              <a class="obra-cta" href="https://andresrubiolavin.github.io/BEO/" target="_blank">Ver obra →</a>
+            </div>
+            <div class="obra-specs">
+              <div><span class="obra-sk">Formato</span><span class="obra-sv">Web interactiva · narrativa no lineal</span></div>
+              <div><span class="obra-sk">Idioma</span><span class="obra-sv">Lengua zapoteca</span></div>
+            </div>
+            <div class="obra-media"><img src="styles/{5C1B0B9B-ECA8-46FA-8E38-7B487AC313D8}.png" alt="BEO"></div>
+          </div></div>
+        </div>
 
-      <div class="obra">
-        <h3>Geo[vo]x</h3> 
-        <p>Geo[vo]x es una plataforma web que conecta la memoria colectiva y la participación comunitaria, explorando cómo los espacios significativos se convierten en anclas de recuerdos y emociones. Utilizando un mapa interactivo como eje central, podrás registrar y compartir relatos personales en formatos de texto y fotografía, vinculándolos a lugares específicos. Esta herramienta nos permite descubrir historias de otros y generar un sentido de comunidad, mientras se reflexiona sobre el valor de los espacios que nos marcan.
-          El proyecto responde a la necesidad de fortalecer el vínculo entre las personas y su entorno, así como entre los miembros de la comunidad. Busca que los espacios cotidianos se conviertan en puntos de encuentro cargados de significado emocional, fomentando la reflexión sobre su valor simbólico. Al compartir y escuchar historias, los participantes pueden conectar con sus propias emociones y las de los demás, promoviendo una comunidad afectiva. Geo[vo]x busca reconocer el paisaje como un elemento clave en la construcción de la memoria e identidad colectiva, transformando el registro de vivencias en un proceso colaborativo que enriquece la percepción de los espacios compartidos y fortalece el tejido social.
-        </p> 
-        <img src="styles\{E5A737FF-B06D-4288-9172-BE024FA0F0B4}.png" alt="Imagen de la obra Geo[vo]x">
-        
-        <a href="https://geovox.onrender.com/index" target="_blank">Ver obra</a>
-    
+        <div class="obra-item">
+          <div class="obra-row" onclick="toggleObra(this)">
+            <span class="obra-num">05</span>
+            <div><div class="obra-title">El Sendero de los Muertos</div><div class="obra-syn">La travesía al Mictlán como experiencia viva.</div></div>
+            <span class="obra-tipo">Videojuego</span><span class="obra-plus">+</span>
+          </div>
+          <div class="obra-body"><div class="obra-body-in">
+            <div class="obra-desc">
+              <p>Videojuego que recrea la travesía hacia el Mictlán. Más allá del homenaje, es un llamado a mirar la diversidad cultural de México: culturas zapoteca, maya, mixteca, totonaca, mazahua, otomí. El conocimiento ancestral convertido en experiencia reflexiva.</p>
+              <a class="obra-cta" href="https://www.construct.net/en/free-online-games/sendero-muertos-61066/play" target="_blank">Jugar →</a>
+            </div>
+            <div class="obra-specs">
+              <div><span class="obra-sk">Motor</span><span class="obra-sv">Construct3</span></div>
+              <div><span class="obra-sk">Presentado en</span><span class="obra-sv">Festivarte</span></div>
+            </div>
+            <div class="obra-media">
+              <img src="styles/portada.jpg" alt="El Sendero de los Muertos">
+              <video controls src="styles/El Sendero de los Muertos_Trailer Official.mp4"></video>
+            </div>
+          </div></div>
+        </div>
 
-      
-      </div>
+        <div class="obra-item">
+          <div class="obra-row" onclick="toggleObra(this)">
+            <span class="obra-num">06</span>
+            <div><div class="obra-title">Cubo de Experiencias</div><div class="obra-syn">Seis personas, seis colores. ¿Qué nos hizo ser quienes somos?</div></div>
+            <span class="obra-tipo">Cortometraje</span><span class="obra-plus">+</span>
+          </div>
+          <div class="obra-body"><div class="obra-body-in">
+            <div class="obra-desc">
+              <p>Mirada íntima a la construcción de la identidad desde las vivencias del equipo. Inspirado en el cubo Rubik: cada cara representa a uno de los miembros, codificada con un color que remite a su personalidad e historia. La obra no ofrece respuestas — abre una ventana a lo que permanece oculto.</p>
+              <a class="obra-cta" href="https://www.youtube.com/watch?v=blIwQ4VeC-M" target="_blank">Ver obra →</a>
+            </div>
+            <div class="obra-specs">
+              <div><span class="obra-sk">Formato</span><span class="obra-sv">Cortometraje</span></div>
+              <div><span class="obra-sk">Enfoque</span><span class="obra-sv">Teoría del color, introspección colectiva</span></div>
+            </div>
+            <div class="obra-media"><img src="styles/{9552FAB1-1B3D-49A1-96A5-A3FCBF74D00B}.png" alt="Cubo de Experiencias"></div>
+          </div></div>
+        </div>
 
-      <div class="obra">
-        <h3>[EC]H2O</h3>
-        <p>[EC]H2O es una instalación interactiva de sitio específico que reactiva la memoria ambiental del territorio donde hoy se erige la Universidad Autónoma Metropolitana, unidad Lerma. La obra parte de una intervención directa en el edificio P, donde se instala una base con la imagen de una de las ciénagas desaparecidas de Lerma, sobre la cual giran engranes activados por servomotores. Estos engranes, en su movimiento lento y constante, simbolizan el ritmo natural de los ecosistemas, pero aceleran cuando se detecta la presencia de los espectadores mediante un sensor Kinect.
+        <div class="obra-item">
+          <div class="obra-row" onclick="toggleObra(this)">
+            <span class="obra-num">07</span>
+            <div><div class="obra-title">Autoretratos</div><div class="obra-syn">El cuerpo como primer territorio.</div></div>
+            <span class="obra-tipo">Fotografía</span><span class="obra-plus">+</span>
+          </div>
+          <div class="obra-body"><div class="obra-body-in">
+            <div class="obra-desc">
+              <p>Serie fotográfica que explora el cuerpo como primer territorio de identidad. La cámara como herramienta de introspección y el encuadre como decisión política: ¿desde dónde me miro? ¿cómo elijo ser visto?</p>
+            </div>
+            <div class="obra-specs">
+              <div><span class="obra-sk">Formato</span><span class="obra-sv">Serie fotográfica</span></div>
+            </div>
+            <div class="obra-media"><img src="styles/454101820_861969691990682_3151608192448561961_n.jpg" alt="Autorretrato"></div>
+          </div></div>
+        </div>
 
-A medida que los interactores modifican el ritmo de los engranes, la intervención revela una imagen de la UAM Lerma —edificada en el lugar de la antigua ciénaga—, mientras se reproducen sonidos de agua y de especies animales que alguna vez habitaron ese entorno. El sonido, espacializado en dos canales, acompaña los pasos de quienes se acercan, evocando la sensación de caminar sobre la superficie de un cuerpo de agua que ya no existe, pero que aún insiste en hacerse oír.
-
-[EC]H2O plantea una metáfora sobre la transformación de los espacios naturales por la actividad humana. En este caso, la universidad —símbolo de conocimiento y progreso— se superpone a un ecosistema desaparecido, y ahora es intervenida por una obra que reanima, como un eco, la voz silenciada de la ciénaga. Los engranes se convierten así en una alegoría de la intervención humana en los ciclos naturales: su aceleración, su desgaste, su memoria persistente.
-
-Esta obra fue desarrollada y expuesta en la UAM Lerma y en el Segundo Festival Estudio Simbiosis con sede en la Escuela Normal 01 de Tolúca, Estado de México</p> 
-
-        
-        <img src="styles\WhatsApp Image 2025-05-10 at 1.23.55 PM.jpeg" alt="Imagen de la obra [EC]H2O">
-        <img src="styles\_MG_7362.JPG" alt="Imagen de la obra [EC]H2O">
-        <img src="styles\_MG_7278.JPG" alt="Imagen de la obra [EC]H2O">
-        <img src="styles\_MG_7394.JPG" alt="Imagen de la obra [EC]H2O">
-  
-      </div>
-
-
-
-
-
-      <div class="obra">
-        <h3>BEO</h3> 
-        <p>BEO es una obra web interactiva de narrativa no lineal que invita a la exploración poética, lingüística y visual a través de la lengua zapoteca. Esta plataforma permite a cada usuario crear su propia versión de un poema a partir de fragmentos extraídos de una colección de textos originales en zapoteco. A medida que se toman decisiones, se desbloquean imágenes asociadas que no solo acompañan el proceso de escritura, sino que también funcionan como huellas de las elecciones realizadas.
-
-Cada experiencia en BEO es única y efímera: una vez concluida la interacción, el sitio se reinicia, ofreciendo la posibilidad de recomenzar, de volver a componer, de reimaginar el poema y su sentido. Esta mecánica refleja no solo la naturaleza mutable de la poesía, sino también la riqueza dinámica de las lenguas indígenas, muchas veces reducidas al silencio por los procesos históricos de marginación.
-
-Con esta obra buscamos visibilizar la vitalidad de las culturas originarias de México, en especial aquellas que han sido sistemáticamente olvidadas o desplazadas. BEO es un ejercicio de escucha y reescritura, un llamado a reconocer la diversidad cultural como un valor esencial y una memoria viva que aún tiene mucho que decir.</p> 
-        
-        <img src="styles\{5C1B0B9B-ECA8-46FA-8E38-7B487AC313D8}.png" alt="Imagen de la obra BEO">
-        <a href="https://andresrubiolavin.github.io/BEO/" target="_blank">Ver obra</a>
-      </div>
-
-
-
-
-       <div class="obra">
-        <h3>El Sendero de los Muertes</h3> 
-        <p>El sendero de los muertos es un videojuego interactivo desarrollado en Construct3 que recrea la travesía hacia el Mictlán, el inframundo según la cosmovisión mexica. Basado en la leyenda ancestral, el juego busca representar con fidelidad simbólica y narrativa los desafíos que el alma debe superar para alcanzar el descanso final, sirviendo como una experiencia lúdica que también es una puerta hacia el conocimiento y la memoria de nuestras raíces.
-
-Más allá de ser un homenaje a la cultura mexica, El sendero de los muertos es un llamado a mirar hacia la inmensa diversidad cultural que conforma México. Culturas como la zapoteca, maya, mixteca, totonaca, mazahua u otomí, entre muchas otras, han sido históricamente invisibilizadas, y sin embargo son pilares de nuestra identidad. Esta obra aspira a despertar en quienes juegan un interés auténtico por conocer estas tradiciones, no como reliquias del pasado, sino como expresiones vivas que aún laten.
-
-A través de la interacción y el juego, el conocimiento ancestral se convierte en una experiencia reflexiva. El sendero de los muertos invita a recorrer no solo el camino hacia el Mictlán, sino también el camino hacia el reconocimiento y el respeto por la riqueza cultural que nos rodea.
-
-
-          Videojuego presentado en el evento Festivarte.</p> 
-
-        <img src="styles\portada.jpg" alt="Imagen del videojuego">
-        
-        <video controls src="styles\El Sendero de los Muertos_Trailer Official.mp4"></video>
-        <a href="https://www.construct.net/en/free-online-games/sendero-muertos-61066/play" target="_blank">Jugar obra</a>
-      </div>
-
-
-      
-      <div class="obra">
-        <h3>Cubo de Experiencias</h3> 
-        <p>Cubo de experiencias es un cortometraje que propone una mirada íntima hacia la construcción de la identidad, a partir de las vivencias personales de cada integrante del equipo de realización. La obra se presenta como un ejercicio de introspección colectiva, donde lo individual se entrelaza con lo grupal, y donde las experiencias pasadas toman forma audiovisual para revelar la complejidad de ser.
-
-Inspirado en la estructura y el simbolismo del cubo Rubik, cada cara del cubo representa a uno de los miembros del equipo, codificada con un color que remite tanto a su personalidad como a su historia. Para esta asignación cromática, se recurrió a la teoría del color como herramienta de expresión emocional y narrativa, permitiendo que cada tono hable por sí mismo sobre quien representa.
-
-Cubo de experiencias no busca ofrecer respuestas, sino abrir una ventana a lo que a menudo permanece oculto: las emociones, heridas, recuerdos y momentos que moldean lo que somos. Es un testimonio visual de lo humano compartido, una pieza que invita al espectador a reconocerse también en los fragmentos del otro.
-
-</p> 
-
-        
-        <img src="styles\{9552FAB1-1B3D-49A1-96A5-A3FCBF74D00B}.png" alt="Imagen de Cubo de experiencias">
-      
-        <a href="https://www.youtube.com/watch?v=blIwQ4VeC-M" target="_blank">Ver obra</a>
-      </div>
-
-
-     <div class="obra">
-        <h3>Autoretratos</h3>
-
-        <img src="styles\403881232_258661687195151_4695672340296465992_n.heic" alt="Imagen del videojuego">
-        <img src="styles\454101820_861969691990682_3151608192448561961_n.jpg" alt="Imagen del videojuego">
-        <img src="styles\470918441_3890765797841784_8156358863046777168_n.heic" alt="Imagen del videojuego">
-        <img src="styles\Soy ese.jpg" alt="Imagen del videojuego">
-        
       </div>
     </section>
 
-<section id="manifiesto" class="manifiesto">
-  <h2 class="centro"><strong>Manifiesto del Arte que Falla</strong></h2>
-
-  <p class="derecha"><strong>ANDRÉS ARIEL RUBIO LAVÍN</strong></p>
-  <p class="centro"><em>El arte está roto. Y qué bien.</em></p>
-  <p class="centro">
-    Se ha roto contra las vitrinas, contra los discursos reciclados, contra los límites que lo querían puro, funcional, presentable.<br>
-    El arte ya no cabe donde antes cabía.<br>
-    Y eso no lo debilita. Lo libera.
-  </p>
-
-  <p class="centro">
-    Está en crisis, sí, como todo lo que vale la pena revisar. Como todo lo que sigue respirando.<br>
-    Porque el arte no es un objeto. Es una tensión. Una sospecha.<br>
-    Un latido entre ruinas.
-  </p>
-
-  <p class="centro">
-    El arte falla.<br>
-    Y fallar no es morir.<br>
-    Fallar es insistir por otra vía.
-  </p>
-
-  <p class="izquierda">El arte cómodo ya no nos alcanza.</p>
-
-  <p class="izquierda">
-    Durante mucho tiempo, el arte supo agradar. Supo quedarse quieto en los muros, supo callarse en las vitrinas, supo complacer miradas ajenas.<br>
-    Ese arte supo cómo funcionar.<br>
-    Y por eso, perdió algo.
-  </p>
-
-  <p class="izquierda">
-    Hoy me interesa el que no encaja. El que interrumpe. El que no quiere decorar nada.<br>
-    Ese que raspa, que abre, que se encarna.<br>
-    El que no grita lemas, pero tampoco se esconde.<br>
-    El que piensa, molesta, falla, incomoda.
-  </p>
-
-  <p class="izquierda">
-    No me interesa el aplauso.<br>
-    Me interesa la incomodidad que deja una buena herida.
-  </p>
-
-  <p class="centro"><strong>Todo arte nace en contexto.</strong></p>
-
-  <p class="centro">
-    No hay neutralidad. No hay afuera.<br>
-    Cada obra viene con sus huellas, con sus estructuras, con sus ideologías incrustadas.<br>
-    Incluso la más íntima. Incluso la más mínima.
-  </p>
-
-  <p class="centro">
-    Como plantea Irmgard Emmelhainz, el arte puede reconfigurar lo sensible.<br>
-    Como señala Rancière, puede desordenar lo que parecía dado.<br>
-    Eso es político, aunque no parezca panfleto.
-  </p>
-
-  <p class="centro">
-    No se trata de educar.<br>
-    Se trata de mover.
-  </p>
-
-  <p class="centro">
-    De hacer que alguien —una persona, al menos— mire de otro modo.<br>
-    Sienta distinto.<br>
-    Recuerde algo que no sabía que sabía.
-  </p>
-
-  <p class="centro"><strong>En México, el arte no puede hacerse el distraído.</strong></p>
-
-  <p class="centro">
-    No se puede crear como si no hubiera lodo bajo los pies.<br>
-    Como si el acceso al arte no fuera aún un privilegio, una rareza, un lujo.<br>
-    Aquí, donde las desigualdades se sienten en el cuerpo, no podemos seguir fingiendo universalismos.
-  </p>
-
-  <p class="centro">
-    El arte no puede seguir hablándole solo a quienes ya lo entienden.<br>
-    Tiene que salir.<br>
-    Bajar del pedestal.<br>
-    Enlodarse.<br>
-    Caminar con polvo, con furia, con contradicción.
-  </p>
-
-  <p class="centro">La crítica también ha fallado. Y eso la hace interesante.</p>
-
-  <p class="centro">
-    Ya no se trata de definir estilos. Ni de encerrar lo contemporáneo en una caja limpia.<br>
-    Lo contemporáneo, como dice Cuauhtémoc Medina, ya no tiene forma fija.<br>
-    Y eso está bien.
-  </p>
-
-  <p class="centro">
-    Porque ahí, en el desorden, en lo inestable, hay potencia.
-  </p>
-
-  <p class="centro">
-    La crítica no debe ser tribunal.<br>
-    Debe ser grieta.<br>
-    Puente.<br>
-    Escucha.
-  </p>
-
-  <p class="izquierda">Queremos otro arte</p>
-
-  <p class="izquierda">
-    No un arte elitista, ni hermético, ni críptico por deporte.<br><strong>
-    Queremos un arte situado, que mire el lugar desde donde habla.<br>
-    Que escuche antes de representar.<br>
-    Que colabore. Que se contradiga.<br>
-    Que sea poroso, afectivo, incómodo.</strong>
-  </p>
-
-  <p class="centro">
-    Como escribió Cixous: “Escribir con el cuerpo. Y el cuerpo no miente.”<br>
-    El arte también es cuerpo.<br>
-    Y todo cuerpo en el mundo es político.
-  </p>
-
-  <p class="centro">El “yo” también puede ser colectivo.</p>
-
-  <p class="centro">
-    No hay vergüenza en hablar desde lo vivido. Desde lo vulnerable. Desde lo fragmentado.
-  </p>
-
-  <p class="centro">
-    La autoetnografía, como dice Jillian Tullis, no es mirarse solo el ombligo.<br>
-    Es una vía para vincularse. Para mostrar que la carne también piensa.
-  </p>
-
-  <p class="centro">
-    Escribir desde el cuerpo, crear desde el cuerpo, es abrir camino hacia lo común.
-  </p>
-
-  <p class="centro">
-    No todo arte debe ser confesión.<br>
-    Pero sí debería ser encarnado.<br>
-    Sentido.<br>
-    Presente.
-  </p>
-
-  <p class="centro">
-    La estética sin ética es solo oropel.
-  </p>
-
-  <p class="izquierda">El arte que me interesa tiene preguntas, no respuestas.</p>
-
-  <p class="izquierda">
-    Ese arte que duda. Que se equivoca. Que no tiene manual.<br>
-    Que falla.<br>
-    Que se permite no saber, pero sigue buscando.
-  </p>
-
-  <p class="derecha">
-    Ese arte introspectivo, sí, pero no aislado.<br>
-    Que explora el dolor, el deseo, la rabia y la ternura.<br>
-    Y regresa a la sociedad con más preguntas que antes.
-  </p>
-
-  <p class="derecha">
-    Ese que no tematiza las cosas urgentes, sino que las activa.<br>
-    La pobreza, el extractivismo, la violencia, la devastación ambiental.<br>
-    No como tópicos, sino como memoria.<br>
-    Como presencia viva.
-  </p>
-
-  <p class="derecha">
-    Un arte que no representa.<br>
-    Un arte que se vuelve canto ritual.
-  </p>
-
-  <p class="centro">El arte no es salvación. Pero es posibilidad.</p>
-
-  <p class="centro">
-    No va a salvarnos. No va a arreglar el mundo.<br>
-    Pero puede hacernos recordar que hay otras formas de vivirlo.
-  </p>
-
-  <p class="centro">
-    Puede abrir una rendija. Una grieta. Una fisura.<br>
-    Eso ya es mucho.
-  </p>
-
-  <p class="centro">
-    No hay una sola manera de crear.<br>
-    No hay una sola voz.<br>
-    No hay una verdad última.<br>
-    Lo contemporáneo es fragmento, es mezcla, es inestabilidad.<br>
-    Y en eso está su fuerza.
-  </p>
-
-  <p class="centro">
-    Rechazo el arte que se mira a sí mismo y se aplaude.<br>
-    Reivindico el arte que se fuga, que colabora, que se arriesga.<br>
-    Y, sobre todo, que se permite fallar.
-  </p>
-
-  <p class="centro"><strong>Llamamiento</strong></p>
-
-  <p class="centro">
-    <strong>A quienes crean:</strong><br>
-    Que no olviden que su obra tiene cuerpo, eco, historia.<br>
-    Que no creen desde la obligación, sino desde el deseo.<br>
-    Pero sabiendo que todo deseo también carga memoria.
-  </p>
-
-  <p class="centro">
-    <strong>A quienes enseñan:</strong><br>
-    Que no repliquen jerarquías.<br>
-    Que abran el espacio para el error.<br>
-    Para la ternura crítica.
-  </p>
-
-  <p class="centro">
-    <strong>A quienes miran, coleccionan, consumen arte:</strong><br>
-    Que se pregunten quién queda fuera.<br>
-    Y si están dispuestos a mirar con otros ojos.
-  </p>
-
-  <p class="centro">
-   <strong> A quienes escriben sobre arte:</strong><br>
-    Que no sean jueces.<br>
-    Que sean puentes.<br>
-    O grietas.
-  </p>
-
-  <p class="centro">
-   <strong> Y a mí, a ti, a nosotros:</strong><br>
-    No dejemos de crear.<br>
-    No para adornar.<br>
-    Sino para desarmar. Para abrir. Para imaginar.
-  </p>
-
-  <p class="centro">
-    Porque el arte no es lujo.<br>
-    Es derecho.<br>
-    Es urgencia.<br>
-    Es memoria.<br>
-    Es cuerpo.<br>
-    Es falla.
-  </p>
-
-  <p class="centro">
-    Creamos para no desaparecer.<br>
-    Creamos para no olvidar.<br>
-    Creamos para existir de otra manera.
-  </p>
-
-  <div class="descarga">
-    <a href= "styles\Manifiesto del Arte que Falla.pdf" download>Manifiesto del Arte que Falla PDF</a>
-  </div>
-</section>
-
-
-
+    <section id="manifiesto">
+      <div class="sec-head"><span class="sec-head-title">Manifiesto</span><span class="sec-head-meta">Andrés Ariel Rubio Lavín · 2025</span></div>
+      <div class="wrap">
+        <div class="mani-body">
+          <p class="ce"><em>El arte está roto. Y qué bien.</em></p>
+          <p class="ce">Se ha roto contra las vitrinas, contra los discursos reciclados, contra los límites que lo querían puro, funcional, presentable. El arte ya no cabe donde antes cabía. Y eso no lo debilita. Lo libera.</p>
+          <p class="ce">El arte falla.<br>Y fallar no es morir.<br>Fallar es insistir por otra vía.</p>
+          <hr>
+          <p class="iz">El arte cómodo ya no nos alcanza.</p>
+          <p class="iz">Hoy me interesa el que no encaja. El que interrumpe. El que no quiere decorar nada. El que piensa, molesta, falla, incomoda.</p>
+          <p class="iz">No me interesa el aplauso.<br>Me interesa la incomodidad que deja una buena herida.</p>
+          <hr>
+          <p class="ce"><strong>Todo arte nace en contexto.</strong></p>
+          <p class="ce">No hay neutralidad. No hay afuera. Como plantea Emmelhainz, el arte puede reconfigurar lo sensible. Como señala Rancière, puede desordenar lo que parecía dado. Eso es político, aunque no parezca panfleto.</p>
+          <hr>
+          <p class="ce"><strong>En México, el arte no puede hacerse el distraído.</strong></p>
+          <p class="ce">No se puede crear como si no hubiera lodo bajo los pies. Aquí, donde las desigualdades se sienten en el cuerpo, no podemos seguir fingiendo universalismos.</p>
+          <p class="de">Ese que no tematiza las cosas urgentes, sino que las activa. La pobreza, el extractivismo, la violencia, la devastación ambiental. No como tópicos, sino como memoria. Como presencia viva.</p>
+          <p class="de">Un arte que no representa.<br>Un arte que se vuelve canto ritual.</p>
+          <hr>
+          <p class="ce">Rechazo el arte que se mira a sí mismo y se aplaude.<br>Reivindico el arte que se fuga, que colabora, que se arriesga.<br>Y, sobre todo, que se permite fallar.</p>
+          <hr>
+          <p class="ce"><strong>Llamamiento</strong></p>
+          <p class="ce"><strong>A quienes crean:</strong> Que no olviden que su obra tiene cuerpo, eco, historia.</p>
+          <p class="ce"><strong>A quienes enseñan:</strong> Que abran el espacio para el error. Para la ternura crítica.</p>
+          <p class="ce"><strong>Y a todos:</strong> No dejemos de crear. No para adornar. Sino para desarmar. Para abrir. Para imaginar.</p>
+          <p class="ce">Porque el arte no es lujo. Es derecho. Es urgencia. Es memoria. Es cuerpo. Es falla.</p>
+          <p class="ce">Creamos para no desaparecer.<br>Creamos para existir de otra manera.</p>
+        </div>
+        <div class="mani-dl"><a href="styles/Manifiesto del Arte que Falla.pdf" download>Descargar manifiesto (PDF) ↓</a></div>
+      </div>
+    </section>
 
     <section id="contacto">
-      <h2>Contacto</h2>
-      <p>Puedes escribirme a: rubiolavin78lh@gmail.com</p>
-      <p>Instagram: <a href="https://instagram.com/leon_d_dios" target="_blank">@leon_d_dios</a></p>
-      <img src="styles\_MG_7283.jpg">
-      
-      
+      <div class="sec-head"><span class="sec-head-title">Contacto</span><span class="sec-head-meta">León de Dios · 2025</span></div>
+      <div class="wrap">
+        <div class="contact-data">
+          <div><span class="contact-k">Correo electrónico</span><span class="contact-v"><a href="mailto:rubiolavin78lh@gmail.com">rubiolavin78lh@gmail.com</a></span></div>
+          <div><span class="contact-k">Instagram</span><span class="contact-v"><a href="https://instagram.com/leon_d_dios" target="_blank">@leon_d_dios</a></span></div>
+          <div><span class="contact-k">Universidad</span><span class="contact-v">UAM Lerma — Arte y Comunicación Digitales</span></div>
+        </div>
+        <div class="contact-img"><img src="styles/_MG_7283.jpg" alt="Andrés Ariel Rubio Lavín"></div>
+      </div>
     </section>
   </main>
 
   <footer>
-    <p>El Arte falla.</p>
-    <p>Este sitio también puede fallar.</p>
+    <span>El arte falla. Este sitio también puede fallar.</span>
+    <span>© 2025 Andrés Ariel Rubio Lavín</span>
   </footer>
 
   <script>
     const secciones = document.querySelectorAll('main section');
-    const header = document.getElementById('inicio');
+    const heroEl = document.getElementById('inicio');
 
     function mostrarSeccion(id) {
-      secciones.forEach(seccion => seccion.classList.remove('active'));
+      secciones.forEach(s => s.classList.remove('active'));
       document.getElementById(id).classList.add('active');
-      header.style.display = 'none';
+      heroEl.style.display = 'none';
+      window.scrollTo({ top:0 });
+    }
+    function mostrarInicio() {
+      secciones.forEach(s => s.classList.remove('active'));
+      heroEl.style.display = 'block';
+      window.scrollTo({ top:0 });
+    }
+    function toggleObra(row) {
+      const item = row.closest('.obra-item');
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.obra-item').forEach(o => o.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
     }
 
-    function mostrarInicio() {
-      secciones.forEach(seccion => seccion.classList.remove('active'));
-      header.style.display = 'flex';
+    // ── GLITCH — replica el GIF: franjas que saltan + aberración cromática ──
+    (function() {
+      const wrap  = document.querySelector('.glitch-wrap');
+      const textEl = document.querySelector('.glitch');
+      let active = false;
+
+      // Canvas que flota ENCIMA sin clip
+      const cv = document.createElement('canvas');
+      cv.style.cssText = 'position:absolute;top:0;left:0;pointer-events:none;overflow:visible;';
+      wrap.appendChild(cv);
+      const ctx = cv.getContext('2d');
+
+      function resize() {
+        // damos espacio extra horizontal para que los shifts no se corten
+        const r = textEl.getBoundingClientRect();
+        const wr = wrap.getBoundingClientRect();
+        cv.width  = wr.width  + 120; // margen para shifts laterales
+        cv.height = wr.height + 20;
+        cv.style.left = '-60px'; // centrar el margen
+      }
+
+      function getFont() {
+        return parseFloat(getComputedStyle(textEl).fontSize);
+      }
+
+      function draw() {
+        resize();
+        ctx.clearRect(0, 0, cv.width, cv.height);
+
+        const fs   = getFont();
+        const lineH = fs * 0.92;
+        const lines = ['LEÓN', 'DE DIOS'];
+        const baseX = 60; // offset por el margen izquierdo
+        const baseY = 0;
+
+        ctx.font = `${fs}px 'Abril Fatface', serif`;
+        ctx.textBaseline = 'top';
+
+        // número de franjas (4-8, como en el GIF)
+        const numSlices = 4 + Math.floor(Math.random() * 5);
+        const totalH = lineH * lines.length;
+        const sliceH = totalH / numSlices;
+
+        for (let i = 0; i < numSlices; i++) {
+          const y1 = baseY + i * sliceH;
+
+          // algunas franjas no se mueven (como en el GIF)
+          const moves = Math.random() > 0.35;
+          const shiftX = moves ? (Math.random() > 0.5 ? 1 : -1) * (20 + Math.random() * 60) : 0;
+
+          ctx.save();
+          ctx.beginPath();
+          ctx.rect(0, y1, cv.width, sliceH);
+          ctx.clip();
+
+          // franja en color original (tinta) desplazada
+          ctx.fillStyle = '#1a1008';
+          lines.forEach((line, li) => {
+            ctx.fillText(line, baseX + shiftX, baseY + li * lineH);
+          });
+
+          // aberración cromática encima: rojo izq, cyan der
+          if (moves) {
+            ctx.fillStyle = 'rgba(220,0,30,0.75)';
+            lines.forEach((line, li) => {
+              ctx.fillText(line, baseX + shiftX - 6, baseY + li * lineH);
+            });
+            ctx.fillStyle = 'rgba(0,220,255,0.75)';
+            lines.forEach((line, li) => {
+              ctx.fillText(line, baseX + shiftX + 6, baseY + li * lineH);
+            });
+          }
+
+          ctx.restore();
+        }
+
+        // ocultar texto original mientras dura el glitch
+        textEl.style.opacity = '0';
+      }
+
+      function clear() {
+        ctx.clearRect(0, 0, cv.width, cv.height);
+        textEl.style.opacity = '1';
+      }
+
+      function runGlitch() {
+        if (active) return;
+        active = true;
+
+        const frames = 6 + Math.floor(Math.random() * 8);
+        let f = 0;
+
+        function tick() {
+          if (f < frames) {
+            draw();
+            f++;
+            setTimeout(tick, 40 + Math.random() * 30);
+          } else {
+            clear();
+            active = false;
+            setTimeout(runGlitch, 1200 + Math.random() * 1800);
+          }
+        }
+        tick();
+      }
+
+      document.fonts.ready.then(() => {
+        resize();
+        setTimeout(runGlitch, 600);
+      });
+
+      window.addEventListener('resize', resize);
+    })();
+    function closeLB() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
     }
+    document.getElementById('lightbox').addEventListener('click', e => { if (e.target === e.currentTarget) closeLB(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLB(); });
+    document.addEventListener('click', e => {
+      if (e.target.matches('.obra-media img')) {
+        document.getElementById('lb-img').src = e.target.src;
+        document.getElementById('lightbox').classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+    });
   </script>
 </body>
 </html>
