@@ -71,6 +71,11 @@
     .sticker { display:inline-block; background:var(--rojo); color:var(--papel); font-family:'Permanent Marker',cursive; font-size:0.9rem; padding:0.5rem 0.9rem; transform:rotate(-3deg); line-height:1.3; max-width:200px; }
     .sticker.rotate-pos { transform:rotate(2.5deg); }
     .sticker.dark { background:var(--tinta); }
+    .stamp { width:100px; height:100px; transform:rotate(-8deg); }
+    .stamp svg { width:100%; height:100%; }
+    .stamp.stamp-alt { width:90px; height:90px; transform:rotate(5deg); }
+    .glyph-crack { width:150px; height:65px; transform:rotate(-1deg); }
+    .glyph-crack svg { width:100%; height:100%; }
     .hero-tagline { font-family:'Permanent Marker',cursive; font-size:1.1rem; line-height:1.4; color:var(--tinta); transform:rotate(-1deg); display:inline-block; max-width:280px; }
     .hero-cols { display:grid; grid-template-columns:1fr 1fr 1fr; gap:0; border-top:3px solid var(--tinta); margin-top:2rem; }
     .hero-col { padding:1rem 1.2rem; border-right:1px solid var(--tinta); }
@@ -133,6 +138,18 @@
     #lb-close { position:absolute; top:1rem; right:1.5rem; font-size:2rem; color:#fff; background:none; border:none; cursor:pointer; opacity:0.5; line-height:1; transition:opacity 0.2s; font-family:'Inconsolata',monospace; }
     #lb-close:hover { opacity:1; }
 
+    /* CONSTANCIAS */
+    #constancias .wrap { padding:0 2rem; }
+    .constancia-item { border-bottom:2px solid var(--tinta); padding:1.6rem 0; }
+    .constancia-item:last-child { border-bottom:none; }
+    .constancia-title { font-family:'Abril Fatface',serif; font-size:clamp(1.3rem,3vw,1.9rem); color:var(--tinta); margin-bottom:0.5rem; }
+    .constancia-desc { font-size:0.88rem; line-height:1.8; color:var(--gris); margin-bottom:1rem; }
+    .constancia-img { width:100%; max-width:680px; display:block; margin:0 auto 1rem; filter:grayscale(15%); }
+    .constancia-meta { font-family:'Inconsolata',monospace; font-size:0.68rem; letter-spacing:0.14em; text-transform:uppercase; color:#999; text-align:center; margin-top:0.4rem; }
+    .constancia-cta { display:inline-block; margin-top:0.3rem; font-family:'Inconsolata',monospace; font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--rojo); text-decoration:none; border-bottom:2px solid var(--rojo); padding-bottom:1px; }
+    .constancia-cta:hover { color:var(--tinta); border-color:var(--tinta); }
+    .constancia-pdf { width:100%; max-width:680px; height:500px; display:block; margin:0 auto 0.8rem; border:1px solid var(--tinta); }
+
     /* MANIFIESTO */
     #manifiesto .wrap { padding:0 2rem; max-width:660px; }
     .mani-body { font-size:0.95rem; line-height:2; color:var(--gris); }
@@ -177,6 +194,7 @@
     <ul class="nav-links">
       <li><a href="#" onclick="mostrarSeccion('sobre-mi')">Sobre mí</a></li>
       <li><a href="#" onclick="mostrarSeccion('obras')">Obras</a></li>
+      <li><a href="#" onclick="mostrarSeccion('constancias')">Constancias</a></li>
       <li><a href="#" onclick="mostrarSeccion('manifiesto')">Manifiesto</a></li>
       <li><a href="#" onclick="mostrarSeccion('contacto')">Contacto</a></li>
     </ul>
@@ -193,27 +211,60 @@
           <p class="hero-name-sub">Arte que falla. Y por eso, persiste.</p>
         </div>
         <div class="hero-side">
-          <div class="sticker">Arte que falla ★<br>2025</div>
-          <div class="hero-tagline">"El arte cómodo ya no nos alcanza."</div>
-          <div class="sticker dark rotate-pos">UAM Lerma<br>Arte Digital</div>
+          <div class="stamp">
+            <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+              <filter id="stampRough">
+                <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" seed="7" result="noise"/>
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="6"/>
+              </filter>
+              <g filter="url(#stampRough)">
+                <circle cx="60" cy="60" r="50" fill="none" stroke="#c8001a" stroke-width="4"/>
+                <circle cx="60" cy="60" r="36" fill="none" stroke="#c8001a" stroke-width="2"/>
+                <line x1="60" y1="28" x2="60" y2="92" stroke="#c8001a" stroke-width="3"/>
+                <line x1="28" y1="60" x2="92" y2="60" stroke="#c8001a" stroke-width="3"/>
+              </g>
+            </svg>
+          </div>
+          <div class="glyph-crack">
+            <svg viewBox="0 0 160 70" xmlns="http://www.w3.org/2000/svg">
+              <filter id="crackRough">
+                <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="2" seed="3" result="n"/>
+                <feDisplacementMap in="SourceGraphic" in2="n" scale="4"/>
+              </filter>
+              <path d="M5,10 L45,35 L30,40 L90,15 L70,50 L130,20 L110,55 L155,30" fill="none" stroke="#1a1008" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" filter="url(#crackRough)"/>
+            </svg>
+          </div>
+          <div class="stamp stamp-alt">
+            <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+              <filter id="stampRough2">
+                <feTurbulence type="fractalNoise" baseFrequency="0.045" numOctaves="3" seed="11" result="noise2"/>
+                <feDisplacementMap in="SourceGraphic" in2="noise2" scale="6"/>
+              </filter>
+              <g filter="url(#stampRough2)">
+                <polygon points="60,10 105,35 105,85 60,110 15,85 15,35" fill="none" stroke="#1a1008" stroke-width="4"/>
+                <line x1="30" y1="45" x2="90" y2="75" stroke="#1a1008" stroke-width="2.5"/>
+                <line x1="30" y1="75" x2="90" y2="45" stroke="#1a1008" stroke-width="2.5"/>
+              </g>
+            </svg>
+          </div>
         </div>
       </div>
       <div class="hero-cols">
         <div class="hero-col">
           <p class="col-hed">Quién</p>
-          <p class="col-body">Artista digital en formación. Programación, fotografía, video, instalación. Arte como grieta — no como decoración.</p>
+          <p class="col-body">Artista digital. Licenciado en Arte y Comunicación Digitales. Programación, fotografía, video, instalación. Arte como grieta — no como decoración.</p>
         </div>
         <div class="hero-col">
           <p class="col-hed">Obras</p>
           <ul class="col-list">
             <li>Dime Quién Soy</li><li>Geo[vo]x</li><li>[EC]H2O</li>
             <li>BEO</li><li>El Sendero de los Muertos</li>
-            <li>Cubo de Experiencias</li><li>Autoretratos</li>
+            <li>Cubo de Experiencias</li><li>Autoretratos</li><li>El Cuarto de Juegos</li>
           </ul>
         </div>
         <div class="hero-col">
           <p class="col-hed">Exposiciones</p>
-          <p class="col-body">[EC]H2O — 2do Festival Estudio Simbiosis, Toluca<br><br>El Sendero de los Muertos — Festivarte</p>
+          <p class="col-body">[EC]H2O — 2do Festival Estudio Simbiosis, Toluca<br><br>El Sendero de los Muertos — Festivarte<br><br>El Cuarto de Juegos — Museo Torres Bicentenario, Toluca</p>
         </div>
       </div>
     </div>
@@ -230,21 +281,21 @@
       <div class="sec-head"><span class="sec-head-title">Sobre mí</span><span class="sec-head-meta">León de Dios · UAM Lerma</span></div>
       <div class="wrap">
         <div class="bio-main">
-          <p>Artista digital en formación, con base en la UAM Lerma. Mi práctica cruza programación, fotografía, edición de audio y video — pero no se limita a la técnica: me interesa el arte como posibilidad de apertura, como grieta que recuerda que hay otras formas de vivir el mundo.</p>
+          <p>Artista digital, licenciado en Arte y Comunicación Digitales por la UAM Lerma. Mi práctica cruza programación, fotografía, edición de audio y video — pero no se limita a la técnica: me interesa el arte como posibilidad de apertura, como grieta que recuerda que hay otras formas de vivir el mundo.</p>
           <p>Mis obras abordan temas sociales y procesos de descubrimiento personal. Creo en un arte que no pretende salvar, pero sí sacudir. Que incomoda, activa la memoria, propone otras formas de habitar lo común.</p>
           <p>El arte que me interesa es tenso, contradictorio, encarnado. Un arte que falla. Y por eso, persiste.</p>
         </div>
         <div class="bio-aside">
           <div class="aside-block"><span class="aside-label">Institución</span><span class="aside-val">Universidad Autónoma Metropolitana, Unidad Lerma</span></div>
           <div class="aside-block"><span class="aside-label">Licenciatura</span><span class="aside-val">Arte y Comunicación Digitales</span></div>
-          <div class="aside-block"><span class="aside-label">Exposiciones</span><span class="aside-val">[EC]H2O — 2do Festival Estudio Simbiosis, Toluca<br><br>El Sendero de los Muertos — Festivarte</span></div>
+          <div class="aside-block"><span class="aside-label">Exposiciones</span><span class="aside-val">[EC]H2O — 2do Festival Estudio Simbiosis, Toluca<br><br>El Sendero de los Muertos — Festivarte<br><br>El Cuarto de Juegos — Museo Torres Bicentenario, Toluca</span></div>
           <div class="aside-block"><span class="aside-label">Disciplinas</span><span class="aside-val">Instalación interactiva · Video experimental · Plataformas web · Videojuego · Fotografía</span></div>
         </div>
       </div>
     </section>
 
     <section id="obras">
-      <div class="sec-head"><span class="sec-head-title">Obras</span><span class="sec-head-meta">07 piezas · 2022—2025</span></div>
+      <div class="sec-head"><span class="sec-head-title">Obras</span><span class="sec-head-meta">08 piezas · 2022—2026</span></div>
       <div class="wrap">
 
         <div class="obra-item">
@@ -384,8 +435,56 @@
             <div class="obra-specs">
               <div><span class="obra-sk">Formato</span><span class="obra-sv">Serie fotográfica</span></div>
             </div>
-            <div class="obra-media"><img src="styles/454101820_861969691990682_3151608192448561961_n.jpg" alt="Autorretrato"></div>
+            <div class="obra-media">
+              <img src="styles/454101820_861969691990682_3151608192448561961_n.jpg" alt="Autorretrato">
+              <img src="styles/doble.heic" alt="Autorretrato">
+              <img src="styles/1.JPG" alt="Autorretrato">
+              <img src="styles/2.JPG" alt="Autorretrato">
+              <img src="styles/3.JPG" alt="Autorretrato">
+            </div>
           </div></div>
+        </div>
+
+        <div class="obra-item">
+          <div class="obra-row" onclick="toggleObra(this)">
+            <span class="obra-num">08</span>
+            <div><div class="obra-title">El Cuarto de Juegos</div><div class="obra-syn">Los juguetes como dispositivos de normalización de roles de género.</div></div>
+            <span class="obra-tipo">Videojuego</span><span class="obra-plus">+</span>
+          </div>
+          <div class="obra-body"><div class="obra-body-in">
+            <div class="obra-desc">
+              <p>Videojuego-obra de arte interactiva que cuestiona los juguetes como dispositivos de normalización de roles de género en la infancia. El personaje intercambia su cabeza entre niño y niña según el juguete con el que interactúa: MaxSteel baila, subvirtiendo su función masculina; Barbie boxea, subvirtiendo su función femenina.</p>
+              <p>La interacción con el dispositivo no normaliza sino que perturba. Al alcanzar quince interacciones, el personaje camina solo hacia la salida, la cámara se separa y la escena se oscurece, regresando al menú.</p>
+            </div>
+            <div class="obra-specs">
+              <div><span class="obra-sk">Motor</span><span class="obra-sv">Godot 4.6.2 · control Xbox</span></div>
+              <div><span class="obra-sk">Interactividad</span><span class="obra-sv">Ocho esferas capacitivas vía ESP32/OSC a TouchDesigner</span></div>
+              <div><span class="obra-sk">Marco teórico</span><span class="obra-sv">Butler, Bourdieu, Preciado, Bogost, Flanagan</span></div>
+              <div><span class="obra-sk">Presentada en</span><span class="obra-sv">Museo Torres Bicentenario · exposición "Icnelia; vivencias en el arte digital"</span></div>
+            </div>
+          </div></div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="constancias">
+      <div class="sec-head"><span class="sec-head-title">Constancias</span><span class="sec-head-meta">León de Dios · 2024—2026</span></div>
+      <div class="wrap">
+
+        <div class="constancia-item">
+          <div class="constancia-title">Museo Torres Bicentenario</div>
+          <div class="constancia-desc">Reconocimiento otorgado por el Gobierno del Estado de México, a través de la Secretaría de Cultura y Turismo, por la participación en la exposición "Icnelia; vivencias en el arte digital" con la obra El Cuarto de Juegos.</div>
+          <img class="constancia-img" src="styles/Museo.jpeg" alt="Reconocimiento Museo Torres Bicentenario">
+          <div class="constancia-meta">Toluca, Estado de México · 15 de agosto de 2026</div>
+        </div>
+
+        <div class="constancia-item">
+          <div class="constancia-title">Estudio Simbiosis</div>
+          <div class="constancia-desc">Constancia por la participación como expositor en el Segundo Festival Estudio Simbiosis.</div>
+          <iframe class="constancia-pdf" src="styles/constancia.pdf"></iframe>
+          <a class="constancia-cta" href="styles/constancia.pdf" target="_blank">Abrir constancia (PDF) →</a>
+          <div class="constancia-meta">Escuela Normal 01 de Toluca, Estado de México · 06 de diciembre de 2024</div>
         </div>
 
       </div>
