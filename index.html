@@ -150,6 +150,12 @@
     .constancia-cta:hover { color:var(--tinta); border-color:var(--tinta); }
     .constancia-pdf { width:100%; max-width:680px; height:500px; display:block; margin:0 auto 0.8rem; border:1px solid var(--tinta); }
 
+    /* PORTAFOLIO */
+    #portafolio .wrap { padding:0 2rem; }
+    .porta-intro { font-size:0.95rem; line-height:1.8; color:var(--gris); max-width:660px; margin-bottom:1.2rem; }
+    .porta-links { display:flex; gap:1.5rem; flex-wrap:wrap; margin-bottom:1.5rem; }
+    .porta-pdf { width:100%; height:85vh; display:block; border:1px solid var(--tinta); }
+
     /* MANIFIESTO */
     #manifiesto .wrap { padding:0 2rem; max-width:660px; }
     .mani-body { font-size:0.95rem; line-height:2; color:var(--gris); }
@@ -194,6 +200,7 @@
     <ul class="nav-links">
       <li><a href="#" onclick="mostrarSeccion('sobre-mi')">Sobre mí</a></li>
       <li><a href="#" onclick="mostrarSeccion('obras')">Obras</a></li>
+      <li><a href="#portafolio" onclick="mostrarSeccion('portafolio')">Portafolio</a></li>
       <li><a href="#" onclick="mostrarSeccion('constancias')">Constancias</a></li>
       <li><a href="#" onclick="mostrarSeccion('manifiesto')">Manifiesto</a></li>
       <li><a href="#" onclick="mostrarSeccion('contacto')">Contacto</a></li>
@@ -355,9 +362,9 @@
             </div>
             <div class="obra-media">
               <img src="styles/WhatsApp Image 2025-05-10 at 1.23.55 PM.jpeg" alt="[EC]H2O">
-              <img src="styles/MG_7362.JPG" alt="[EC]H2O">
-              <img src="styles/MG_7278.jpg" alt="[EC]H2O">
-              <img src="styles/MG_7394.JPG" alt="[EC]H2O">
+              <img src="styles/_MG_7362.JPG" alt="[EC]H2O">
+              <img src="styles/_MG_7278.JPG" alt="[EC]H2O">
+              <img src="styles/_MG_7394.JPG" alt="[EC]H2O">
             </div>
           </div></div>
         </div>
@@ -438,9 +445,9 @@
             <div class="obra-media">
               <img src="styles/454101820_861969691990682_3151608192448561961_n.jpg" alt="Autorretrato">
               <img src="styles/doble.heic" alt="Autorretrato">
-              <img src="styles/a.jpg" alt="Autorretrato">
-              <img src="styles/b.jpg" alt="Autorretrato">
-              <img src="styles/c.jpg" alt="Autorretrato">
+              <img src="styles/1.JPG" alt="Autorretrato">
+              <img src="styles/2.JPG" alt="Autorretrato">
+              <img src="styles/3.JPG" alt="Autorretrato">
             </div>
           </div></div>
         </div>
@@ -465,6 +472,18 @@
           </div></div>
         </div>
 
+      </div>
+    </section>
+
+    <section id="portafolio">
+      <div class="sec-head"><span class="sec-head-title">Portafolio</span><span class="sec-head-meta">Andrés Ariel Rubio Lavín · 2022—2026</span></div>
+      <div class="wrap">
+        <p class="porta-intro">Diseño digital, desarrollo web y experiencias interactivas. Proyectos para clientes, sitios institucionales y obra expuesta en museo.</p>
+        <div class="porta-links">
+          <a class="constancia-cta" href="styles/Portafolio_Andres_Rubio_Lavin.pdf" target="_blank">Abrir portafolio (PDF) →</a>
+          <a class="constancia-cta" href="styles/Portafolio_Andres_Rubio_Lavin.pdf" download>Descargar ↓</a>
+        </div>
+        <iframe class="porta-pdf" src="styles/Portafolio_Andres_Rubio_Lavin.pdf" title="Portafolio de Andrés Ariel Rubio Lavín"></iframe>
       </div>
     </section>
 
@@ -531,7 +550,7 @@
           <div><span class="contact-k">Instagram</span><span class="contact-v"><a href="https://instagram.com/leon_d_dios" target="_blank">@leon_d_dios</a></span></div>
           <div><span class="contact-k">Universidad</span><span class="contact-v">UAM Lerma — Arte y Comunicación Digitales</span></div>
         </div>
-        <div class="contact-img"><img src="styles/an.jpg" alt="Andrés Ariel Rubio Lavín"></div>
+        <div class="contact-img"><img src="styles/_MG_7283.jpg" alt="Andrés Ariel Rubio Lavín"></div>
       </div>
     </section>
   </main>
@@ -556,6 +575,8 @@
       heroEl.style.display = 'block';
       window.scrollTo({ top:0 });
     }
+    if (location.hash === '#portafolio') mostrarSeccion('portafolio');
+
     function toggleObra(row) {
       const item = row.closest('.obra-item');
       const wasOpen = item.classList.contains('open');
